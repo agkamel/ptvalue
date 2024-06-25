@@ -18,6 +18,7 @@ new_ptvalue <- function(x = double()) {
 
 
 # Helper
+#' @export
 ptvalue <- function(x) {
   x <- as.double(x)
   #validate_ptvalue(x)
@@ -26,6 +27,7 @@ ptvalue <- function(x) {
 
 
 # print.ptvalue
+#' @export
 print.ptvalue <- function(x, ...) {
   to_be_printed <- ifelse(x >= 1, paste0("×", x), paste0("÷", 1 / x))
   cat(to_be_printed)
