@@ -18,7 +18,15 @@ new_ptvalue <- function(x = double()) {
 
 
 # Helper
+#' Title
+#'
+#' @param x A numeric vector
+#'
+#' @return A ptvalue
 #' @export
+#'
+#' @examples
+#' #Todo
 ptvalue <- function(x) {
   x <- as.double(x)
   #validate_ptvalue(x)
@@ -27,7 +35,16 @@ ptvalue <- function(x) {
 
 
 # print.ptvalue
+#' Title
+#'
+#' @param x A numeric vector
+#' @param ... Other args
+#'
+#' @return A ptvalue
 #' @export
+#'
+#' @examples
+#' #Todo
 print.ptvalue <- function(x, ...) {
   to_be_printed <- ifelse(x >= 1, paste0("×", x), paste0("÷", 1 / x))
   cat(to_be_printed)
