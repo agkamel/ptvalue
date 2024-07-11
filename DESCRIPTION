@@ -1,11 +1,10 @@
 Package: ptvalue
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Working With Precision Teaching Values
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Alexandre Gellen-Kamel
+Maintainer: Alexandre Gellen-Kamel <kamel.ag@outlook.com>
+Description: Working With Precision Teaching Values.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,3 +14,8 @@ Config/testthat/edition: 3
 RoxygenNote: 7.3.1
 URL: https://github.com/agkamel/ptvalue
 BugReports: https://github.com/agkamel/ptvalue/issues
+Imports: 
+    cli,
+    rlang,
+    vctrs
+Roxygen: list(markdown = TRUE)
