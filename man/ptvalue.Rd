@@ -2,19 +2,38 @@
 % Please edit documentation in R/ptvalue.R
 \name{ptvalue}
 \alias{ptvalue}
-\title{Title}
+\alias{is_ptvalue}
+\alias{as_ptvalue}
+\title{ptvalue: Working with precision teaching values}
 \usage{
-ptvalue(x)
+ptvalue(x = double())
+
+is_ptvalue(x)
+
+as_ptvalue(x)
 }
 \arguments{
-\item{x}{A numeric vector}
+\item{x}{A numeric vector. Values must be greater than 0.}
 }
 \value{
-A ptvalue
+A numeric vector of class \strong{ptvalue} that represent precision teaching mesures.
 }
 \description{
-Title
+This class allow to print precision teaching mesures with the
+times or the division symbols like \eqn{\times 2} or \eqn{\div 1.4} by
+converting numeric values to precision teaching values. More specifically,
+input values between \eqn{ ] 0, 1 [ } will return output values greater or
+equal than \eqn{1} prefixed with \eqn{\div}; input values between \eqn{[ 1,
+\infty [} will return output values greater or equal than \eqn{1} prefixed
+with \eqn{\times}.
+}
+\details{
+A few arithmetic operations will be allowed in the futur. It is currently
+under development.
 }
 \examples{
-#Todo
+x <- c(0.5, 0.8, 1, 1.25, 2)
+ptvalue(x)
+x <- c(0.5, 1, 2)
+as_ptvalue(x)
 }

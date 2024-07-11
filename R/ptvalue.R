@@ -1,55 +1,159 @@
-# Constuctor
+# Constructor function ----------------------------------------------------
+
 new_ptvalue <- function(x = double()) {
-  stopifnot(is.double(x))
-  x <- structure(x, class = "ptvalue")
-  x
+
+  if (!rlang::is_double(x)) {
+    rlang::abort("`x` must be a double vector.")
+  }
+
+  if (any(x <= 0)) {
+    rlang::abort("`x` must be greater than 0.")
+  }
+
+  vctrs::new_vctr(x, class = "ptvalue")
 }
 
 
-# Validator
-# validate_ptvalue <- function(x) {
-#   values <- unclass(x)
-#   if (any(sign(values) == -1)) {
-#     stop(
-#       "All `x` value must be positive."
-#     )
-#   }
-# }
+# Helper function ---------------------------------------------------------
 
-
-# Helper
-#' Title
+#' ptvalue: Working with precision teaching values
 #'
-#' @param x A numeric vector
+#' This class allow to print precision teaching mesures with the
+#' times or the division symbols like \eqn{\times 2} or \eqn{\div 1.4} by
+#' converting numeric values to precision teaching values. More specifically,
+#' input values between \eqn{ ] 0, 1 [ } will return output values greater or
+#' equal than \eqn{1} prefixed with \eqn{\div}; input values between \eqn{[ 1,
+#' \infty [} will return output values greater or equal than \eqn{1} prefixed
+#' with \eqn{\times}.
 #'
-#' @return A ptvalue
+#' A few arithmetic operations will be allowed in the futur. It is currently
+#' under development.
+#'
+#' @param x A numeric vector. Values must be greater than 0.
+#'
+#' @return A numeric vector of class **ptvalue** that represent precision teaching mesures.
 #' @export
 #'
+#' @rdname ptvalue
 #' @examples
-#' #Todo
-ptvalue <- function(x) {
-  x <- as.double(x)
-  #validate_ptvalue(x)
+#' x <- c(0.5, 0.8, 1, 1.25, 2)
+#' ptvalue(x)
+ptvalue <- function(x = double()) {
+  x <- vctrs::vec_cast(x, double())
   new_ptvalue(x)
 }
 
 
-# print.ptvalue
-#' Title
-#'
-#' @param x A numeric vector
-#' @param ... Other args
-#'
-#' @return A ptvalue
+# Convenience function
 #' @export
-#'
-#' @examples
-#' #Todo
-print.ptvalue <- function(x, ...) {
-  to_be_printed <- ifelse(x >= 1, paste0("×", x), paste0("÷", 1 / x))
-  cat(to_be_printed)
+#' @rdname ptvalue
+is_ptvalue <- function(x) {
+  inherits(x, "ptvalue")
 }
 
+
+
+# Format methods ----------------------------------------------------------
+
+# format() method
+#' @export
+format.ptvalue <- function(x, ...) {
+
+  times <- vctrs::vec_data(x) >= 1
+  divs <- vctrs::vec_data(x) < 1
+  nas <- is.na(vctrs::vec_data(x))
+
+  out <- vctrs::vec_data(x)
+  out[divs] <- 1 / out[divs]
+  out[nas] <- NA
+
+  out <- formatC(signif(out, 3))
+
+  out[times] <- paste0("\u00d7", out[times])
+  out[divs] <- paste0("\u00f7", out[divs])
+
+  out
+}
+
+
+
+# Abbreviations
+#' @export
+vec_ptype_abbr.ptvalue <- function(x, ...) {
+  "ptval"
+}
+
+
+
+
+# Coercion and casting ----------------------------------------------------
+
+## Coercion  -------------------------------------------
+
+# Coercion
+#' @export
+vec_ptype2.ptvalue.ptvalue <- function(x, y, ...) new_ptvalue()
+#' @export
+vec_ptype2.ptvalue.double <- function(x, y, ...) double()
+#' @export
+vec_ptype2.double.ptvalue <- function(x, y, ...) double()
+
+# For testing purposes only
+#vctrs::vec_ptype_show(ptvalue(), double(), ptvalue()) # Keep commented
+
+## Casting  -------------------------------------------
+
+#' @export
+vec_cast.ptvalue.ptvalue <- function(x, to, ...) x
+#' @export
+vec_cast.ptvalue.double <- function(x, to, ...) ptvalue(x)
+#' @export
+vec_cast.double.ptvalue <- function(x, to, ...) vctrs::vec_data(x)
+
+# For testing purposes only
+#vctrs::vec_cast(0.5, ptvalue())  # Keep commented
+#vctrs::vec_cast(ptvalue(0.5), double())  # Keep commented
+
+# Casting helper
+
+#' @export
+#' @rdname ptvalue
+#' @examples
+#' x <- c(0.5, 1, 2)
+#' as_ptvalue(x)
+as_ptvalue <- function(x) {
+  vctrs::vec_cast(x, new_ptvalue())
+}
+
+
+# Arithmetics -------------------------------------------------------------
+
+#' @import vctrs
+#' @export
+#' @method vec_arith ptvalue
+vec_arith.ptvalue <- function(op, x, y, ...) {
+  UseMethod("vec_arith.ptvalue", y)
+}
+
+#' @export
+#' @method vec_arith.ptvalue default
+vec_arith.ptvalue.default <- function(op, x, y, ...) {
+  vctrs::stop_incompatible_op(op, x, y)
+}
+
+#' @export
+#' @method vec_arith.ptvalue ptvalue
+vec_arith.ptvalue.ptvalue <- function(op, x, y, ...) {
+
+  cli::cli_warn("Operations between vectors of class ptvalue are in active development and are not reliable yet.")
+
+  switch(
+    op,
+    "*" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    "/" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    vctrs::stop_incompatible_op(op, x, y)
+  )
+}
 
 
 
