@@ -1,21 +1,22 @@
-Package: ptvalue
 Type: Package
+Package: ptvalue
 Title: Working With Precision Teaching Values
 Version: 0.1.0
-Author: Alexandre Gellen-Kamel
-Maintainer: Alexandre Gellen-Kamel <kamel.ag@outlook.com>
+Authors@R: 
+    person("Alexandre", "Gellen-Kamel", , "kamel.ag@outlook.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0382-2478"))
 Description: Working With Precision Teaching Values.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-RoxygenNote: 7.3.1
 URL: https://github.com/agkamel/ptvalue
 BugReports: https://github.com/agkamel/ptvalue/issues
 Imports: 
     cli,
     rlang,
     vctrs
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
