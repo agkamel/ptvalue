@@ -146,7 +146,7 @@ vec_arith.ptvalue.default <- function(op, x, y, ...) {
 vec_arith.ptvalue.ptvalue <- function(op, x, y, ...) {
 
   cli::cli_warn("Operations between vectors of class
-                ptvalue are in active development and are not reliable yet.",
+                ptvalue are in active development and are not reliable yet. Use with care.",
                 .frequency = "once",
                 .frequency_id = "operation")
 
