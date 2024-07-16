@@ -6,8 +6,8 @@ new_ptvalue <- function(x = double()) {
     rlang::abort("`x` must be a double vector.")
   }
 
-  if (any(x <= 0)) {
-    rlang::abort("`x` must be greater than 0.")
+  if (any(x < 0)) {
+    rlang::abort("`x` must be greater or equal than 0.")
   }
 
   vctrs::new_vctr(x, class = "ptvalue")
