@@ -139,10 +139,10 @@ invert_sign(x)
 #> [1] ×2   ÷1.4 ÷2
 ```
 
-## Report
+## Report PT values
 
 Because PT values can be stored in dataframes, it helps us to generate
-beautiful tables for
+beautiful tables for journal articles or reports.
 
 ``` r
 pt_df |> 

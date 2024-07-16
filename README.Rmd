@@ -108,9 +108,9 @@ x
 invert_sign(x)
 ```
 
-## Report
+## Report PT values
 
-Because PT values can be stored in dataframes, it helps us to generate beautiful tables for 
+Because PT values can be stored in dataframes, it helps us to generate beautiful tables for journal articles or reports.
 
 ```{r, fig.cap="Celeration by phase."}
 pt_df |> 
