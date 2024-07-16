@@ -141,14 +141,16 @@ invert_sign(x)
 
 ## Report
 
+Because PT values can be stored in dataframes, it helps us to generate
+beautiful tables for
+
 ``` r
-pt_df |> knitr::kable(caption = "Celeration by phase")
+pt_df |> 
+  knitr::kable(col.names = c("Phase", "Celeration"))
 ```
 
-| phase | celeration |
+| Phase | Celeration |
 |------:|-----------:|
 |     1 |         ÷2 |
 |     2 |       ×1.4 |
 |     3 |         ×2 |
-
-Celeration by phase

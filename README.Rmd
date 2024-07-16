@@ -110,8 +110,11 @@ invert_sign(x)
 
 ## Report
 
-```{r}
-pt_df |> knitr::kable(caption = "Celeration by phase")
+Because PT values can be stored in dataframes, it helps us to generate beautiful tables for 
+
+```{r, fig.cap="Celeration by phase."}
+pt_df |> 
+  knitr::kable(col.names = c("Phase", "Celeration"))
 ```
 
 
