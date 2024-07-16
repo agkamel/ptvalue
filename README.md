@@ -6,45 +6,74 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ptvalue is to …
+The goal of ptvalue is to provide a simple class for manipulating and
+printing measures related to precision teaching (celeration, bounce,
+etc.).
 
 ## Installation
 
 You can install the development version of ptvalue like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+remotes::install_github("agkamel/ptvalue")
 ```
 
-## Example
+## Create a ptvalue
 
-This is a basic example which shows you how to solve a common problem:
+We can create precision teaching values with `ptvalue()`:
 
 ``` r
 library(ptvalue)
-## basic example code
+ptvalue(c(0.5, 1.4, 2))
+#> <ptvalue[3]>
+#> [1] ÷2   ×1.4 ×2
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+For all original values that are greater or equal than $1$, a prefixed
+$\times$ symbol is added. For all original values that are greater than
+$0$ and smaller than $1$, these value are converted to a value greater
+than $1$ and a prefixed $\div$ symbol is added:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+ptvalue(c(5, 2, 1.25))
+#> <ptvalue[3]>
+#> [1] ×5    ×2    ×1.25
+ptvalue(c(0.2, 0.5, 0.8))
+#> <ptvalue[3]>
+#> [1] ÷5    ÷2    ÷1.25
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+While ptvalue are printed, the original values are always conserved:
 
-You can also embed plots, for example:
+``` r
+x <- ptvalue(c(0.5, 1.4, 2))
+x
+#> <ptvalue[3]>
+#> [1] ÷2   ×1.4 ×2
+unclass(x)
+#> [1] 0.5 1.4 2.0
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Multiplications and divisions
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+Because original values are always conserved under the hood, this allows
+us to multiply and divide ptvalues:
+
+``` r
+ptvalue(1.4) * ptvalue(2)
+#> Warning: Operations between vectors of class ptvalue are in active development and are
+#> not reliable yet.
+#> This warning is displayed once per session.
+#> <ptvalue[1]>
+#> [1] ×2.8
+ptvalue(2) * ptvalue(1.4)
+#> <ptvalue[1]>
+#> [1] ×2.8
+
+ptvalue(0.5) / ptvalue(2)
+#> <ptvalue[1]>
+#> [1] ÷4
+ptvalue(2) / ptvalue(0.5)
+#> <ptvalue[1]>
+#> [1] ×4
+```
