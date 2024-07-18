@@ -67,7 +67,7 @@ format.ptvalue <- function(x, ...) {
   out[divs] <- 1 / out[divs]
   out[nas] <- NA
 
-  out <- formatC(signif(out, 3))
+  out <- format(formatC(out, format = "g"))
 
   out[times] <- paste0("\u00d7", out[times])
   out[divs] <- paste0("\u00f7", out[divs])
