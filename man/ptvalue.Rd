@@ -4,16 +4,21 @@
 \alias{ptvalue}
 \alias{is_ptvalue}
 \alias{as_ptvalue}
+\alias{as_ptvalue.default}
 \title{ptvalue: Working with precision teaching values}
 \usage{
 ptvalue(x = double())
 
 is_ptvalue(x)
 
-as_ptvalue(x)
+as_ptvalue(x, ...)
+
+\method{as_ptvalue}{default}(x, ...)
 }
 \arguments{
 \item{x}{A numeric vector. Values must be greater than 0.}
+
+\item{...}{Other values passed to method.}
 }
 \value{
 A numeric vector of class \strong{ptvalue} that represent precision teaching mesures.

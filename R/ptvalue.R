@@ -30,6 +30,7 @@ new_ptvalue <- function(x = double()) {
 #' under development.
 #'
 #' @param x A numeric vector. Values must be greater than 0.
+#' @param ... Other values passed to method.
 #'
 #' @return A numeric vector of class **ptvalue** that represent precision teaching mesures.
 #' @export
@@ -147,10 +148,15 @@ vec_cast.character.ptvalue <- function(x, to, ...) {
 #' @examples
 #' x <- c(0.5, 1, 2)
 #' as_ptvalue(x)
-as_ptvalue <- function(x) {
-  vctrs::vec_cast(x, new_ptvalue())
+as_ptvalue <- function(x, ...) {
+  UseMethod("as_ptvalue")
 }
 
+#' @export
+#' @rdname ptvalue
+as_ptvalue.default <- function(x, ...) {
+  vctrs::vec_cast(x, new_ptvalue())
+}
 
 # Arithmetics -------------------------------------------------------------
 
