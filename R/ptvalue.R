@@ -98,6 +98,11 @@ vec_ptype2.ptvalue.double <- function(x, y, ...) double()
 #' @export
 vec_ptype2.double.ptvalue <- function(x, y, ...) double()
 
+#' @export
+vec_ptype2.ptvalue.character <- function(x, y, ...) character()
+#' @export
+vec_ptype2.character.ptvalue <- function(x, y, ...) character()
+
 # For testing purposes only
 #vctrs::vec_ptype_show(ptvalue(), double(), ptvalue()) # Keep commented
 
@@ -110,9 +115,30 @@ vec_cast.ptvalue.double <- function(x, to, ...) ptvalue(x)
 #' @export
 vec_cast.double.ptvalue <- function(x, to, ...) vctrs::vec_data(x)
 
+#' @export
+vec_cast.character.ptvalue <- function(x, to, ...) {
+  times <- vctrs::vec_data(x) >= 1
+  divs <- vctrs::vec_data(x) < 1
+  nas <- is.na(vctrs::vec_data(x))
+
+  out <- vctrs::vec_data(x)
+  out[divs] <- 1 / out[divs]
+  out[nas] <- NA
+
+  out <- format(formatC(out, format = "g"))
+
+  out[times] <- paste0("\u00d7", out[times])
+  out[divs] <- paste0("\u00f7", out[divs])
+
+  out
+  }
+
+
 # For testing purposes only
 #vctrs::vec_cast(0.5, ptvalue())  # Keep commented
 #vctrs::vec_cast(ptvalue(0.5), double())  # Keep commented
+#vctrs::vec_cast("allo", ptvalue()) # Keep commented # Devrait soulever une erreur
+#vctrs::vec_cast(ptvalue(2), character()) # Keep commented
 
 # Casting helper
 
