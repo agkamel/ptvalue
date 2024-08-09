@@ -223,13 +223,18 @@ abs_sign <- function(x = double(), sign = "times") {
   stopifnot("Arg `sign` must be either 'times' or 'div'." = sign %in% c("times", "div"))
 
   if (sign == "times") {
-    ifelse(vctrs::vec_cast(x, double()) >= 1,
-           new_ptvalue(vctrs::vec_cast(x, double())),
-           invert_sign(x))
+    output <- ifelse(vctrs::vec_cast(x, double()) >= 1,
+                     vctrs::vec_cast(x, double()),
+                     invert_sign(x))
+
+    return(new_ptvalue(output))
 
   } else if (sign == "div") {
-    ifelse(vctrs::vec_cast(x, double()) >= 1,
-           invert_sign(x),
-           new_ptvalue(vctrs::vec_cast(x, double())))
+    output <- ifelse(vctrs::vec_cast(x, double()) >= 1,
+                     invert_sign(x),
+                     vctrs::vec_cast(x, double()))
+
+    return(new_ptvalue(output))
+
   }
 }
