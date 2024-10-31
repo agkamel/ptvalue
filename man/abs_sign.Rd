@@ -7,12 +7,12 @@
 abs_sign(x = double(), sign = "times")
 }
 \arguments{
-\item{x}{A vector of class \code{ptvalue}}
+\item{x}{A vector of class \code{ptvalue} or of type \code{double}.}
 
-\item{sign}{Either 'times' or 'div'. Default to 'times'.}
+\item{sign}{Either \code{"times"} or \code{"div"}. Default to 'times'.}
 }
 \value{
-A vector of class \code{ptvalue} with absolute ptvalue
+A vector of class \code{ptvalue} with absolute ptvalue.
 }
 \description{
 Find 'absolute' ptvalue

@@ -209,10 +209,10 @@ invert_sign <- function(x = double()) {
 
 #' Find 'absolute' ptvalue
 #'
-#' @param x A vector of class `ptvalue`
-#' @param sign Either 'times' or 'div'. Default to 'times'.
+#' @param x A vector of class `ptvalue` or of type `double`.
+#' @param sign Either `"times"` or `"div"`. Default to 'times'.
 #'
-#' @return A vector of class `ptvalue` with absolute ptvalue
+#' @return A vector of class `ptvalue` with absolute ptvalue.
 #' @export
 #'
 #' @examples
