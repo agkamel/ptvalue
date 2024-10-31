@@ -7,10 +7,10 @@
 invert_sign(x = double())
 }
 \arguments{
-\item{x}{A vector of class \code{ptvalue}}
+\item{x}{A vector of class \code{ptvalue} or of type \code{double}.}
 }
 \value{
-A vector of class \code{ptvalue} with inverted sign
+A vector of class \code{ptvalue} with inverted sign.
 }
 \description{
 Invert ptvalue sign

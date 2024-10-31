@@ -195,9 +195,9 @@ vec_arith.ptvalue.ptvalue <- function(op, x, y, ...) {
 
 #' Invert ptvalue sign
 #'
-#' @param x A vector of class `ptvalue`
+#' @param x A vector of class `ptvalue` or of type `double`.
 #'
-#' @return A vector of class `ptvalue` with inverted sign
+#' @return A vector of class `ptvalue` with inverted sign.
 #' @export
 #'
 #' @examples
