@@ -74,11 +74,14 @@ test_that("is_ptvalue works properly", {
 })
 
 
+# Tests for as_ptvalue() --------------------------------------------------
 test_that("conversion works properly", {
   expect_equal(as_ptvalue(1) |> as.character(), "×1")
 })
 
 
+
+# Tests for invert_sign() -------------------------------------------------
 test_that("invert_sign works properly", {
   expect_equal(invert_sign(c(0.5, 2)) |> as.character(),
                c("×2", "÷2"))
