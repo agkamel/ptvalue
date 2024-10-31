@@ -238,3 +238,31 @@ abs_sign <- function(x = double(), sign = "times") {
 
   }
 }
+
+#' Create times or div vector of class **ptvalue**.
+#'
+#' `times()` and `div()` are convenient and stricter functions
+#' for creating growing or decaying precision teaching values with values
+#' with values greater or equal than 1 (or otherwise raise an error).
+#'
+#' @param x A numeric vector. Values must be greater or equal than 1.
+#'
+#' @return A numeric vector of class **ptvalue** that represent precision teaching mesures.
+#' @export
+#' @rdname timesdiv
+#' @examples
+#' times(c(1, 2, 4))
+#' div(c(1, 2, 4))
+times <- function(x = double()) {
+  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
+  abs_sign(x, sign = "times")
+}
+
+#' @export
+#' @rdname timesdiv
+div <- function(x = double()) {
+  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
+  abs_sign(x, sign = "div")
+
+}
+
