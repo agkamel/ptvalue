@@ -266,3 +266,10 @@ div <- function(x = double()) {
 
 }
 
+as_times <- function(x = double()) {
+  abs_sign(x, sign = "times")
+}
+
+as_div <- function(x = double()) {
+  abs_sign(x, sign = "div")
+}
