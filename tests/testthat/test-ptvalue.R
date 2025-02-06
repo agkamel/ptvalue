@@ -60,7 +60,13 @@ test_that("division works properly", {
 
 })
 
+test_that("NAs are handled properly", {
 
+  expect_equal(vctrs::vec_data(ptvalue(NA)), NA_real_)
+
+  expect_equal(vctrs::vec_data(ptvalue(c(2, NA))), c(2, NA))
+
+})
 
 
 

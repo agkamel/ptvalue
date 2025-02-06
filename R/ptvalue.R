@@ -6,7 +6,7 @@ new_ptvalue <- function(x = double()) {
     rlang::abort("`x` must be a double vector.")
   }
 
-  if (any(x < 0)) {
+  if (any(x < 0, na.rm = TRUE)) {
     rlang::abort("`x` must be greater or equal than 0.")
   }
 
@@ -63,6 +63,8 @@ format.ptvalue <- function(x, ...) {
   times <- vctrs::vec_data(x) >= 1
   divs <- vctrs::vec_data(x) < 1
   nas <- is.na(vctrs::vec_data(x))
+  times[nas] <- FALSE
+  divs[nas] <- FALSE
 
   out <- vctrs::vec_data(x)
   out[divs] <- 1 / out[divs]
