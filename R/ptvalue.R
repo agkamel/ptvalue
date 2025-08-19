@@ -80,6 +80,17 @@ format.ptvalue <- function(x, ...) {
 
 
 
+# Section in work
+# #' @importFrom pillar pillar_shaft
+# #' @export
+# pillar_shaft.ptvalue <- function(x, ...) {
+#   out <- format(x)
+#   pillar::new_pillar_shaft_simple(out, align = "right", min_width = 10)
+# }
+
+
+
+
 # Abbreviations
 #' @export
 vec_ptype_abbr.ptvalue <- function(x, ...) {
