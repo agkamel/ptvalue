@@ -22,7 +22,13 @@ The goal of **ptvalue** is to provide a S3 class for printing and for small mani
 
 ## Installation
 
-You can install the development version of **ptvalue** like so:
+You can install **ptvalue** with the following code
+
+``` r
+install.packages("ptvalue")
+```
+
+or you can install the development version as follow:
 
 ``` r
 remotes::install_github("agkamel/ptvalue")

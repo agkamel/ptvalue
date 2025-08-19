@@ -4,6 +4,7 @@
 # ptvalue
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of **ptvalue** is to provide a S3 class for printing and for
@@ -15,7 +16,13 @@ report or paper.
 
 ## Installation
 
-You can install the development version of **ptvalue** like so:
+You can install **ptvalue** with the following code
+
+``` r
+install.packages("ptvalue")
+```
+
+or you can install the development version as follow:
 
 ``` r
 remotes::install_github("agkamel/ptvalue")
@@ -40,10 +47,10 @@ value greater than $1$ and a prefixed $\div$ symbol is added:
 ``` r
 ptvalue(c(5, 2, 1.25))
 #> <ptvalue[3]>
-#> [1] ×5    ×2    ×1.25
+#> [1] ×5   ×2   ×1.2
 ptvalue(c(0.2, 0.5, 0.8))
 #> <ptvalue[3]>
-#> [1] ÷5    ÷2    ÷1.25
+#> [1] ÷5   ÷2   ÷1.2
 ```
 
 Negative values always raises an error.
@@ -71,9 +78,9 @@ pt_df
 #> # A tibble: 3 × 2
 #>   phase celeration
 #>   <int>    <ptval>
-#> 1     1         ÷2
+#> 1     1       ÷2  
 #> 2     2       ×1.4
-#> 3     3         ×2
+#> 3     3       ×2
 ```
 
 The type of a `ptvalue` vector is `double`. The original values are
@@ -111,10 +118,10 @@ ptvalue(2) * ptvalue(x)
 # Division is not commutative
 ptvalue(x) / ptvalue(2)
 #> <ptvalue[3]>
-#> [1] ÷4    ÷1.43 ×1
+#> [1] ÷4   ÷1.4 ×1
 ptvalue(2) / ptvalue(x)
 #> <ptvalue[3]>
-#> [1] ×4    ×1.43 ×1
+#> [1] ×4   ×1.4 ×1
 ```
 
 PT values can be used with comparison operators as well:
