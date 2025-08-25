@@ -5,3 +5,4 @@
 ^.Rprofile$
 R\_in_development
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
