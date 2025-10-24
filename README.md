@@ -21,13 +21,13 @@ packages will also be kept minimal.
 
 ## Installation
 
-You can install **ptvalue** with the following code
+You can install **ptvalue** with the following code:
 
 ``` r
 install.packages("ptvalue")
 ```
 
-or you can install the development version as follow:
+Or you can install the development version as follow:
 
 ``` r
 remotes::install_github("agkamel/ptvalue")
@@ -124,9 +124,6 @@ PT values:
 ``` r
 # Multiplication is commutative
 ptvalue(x) * ptvalue(2)
-#> Warning: Operations between vectors of class ptvalue are in active development and are
-#> not reliable yet. Use with care.
-#> This warning is displayed once per session.
 #> <ptvalue[3]>
 #> [1] ×1   ×2.8 ×4
 ptvalue(2) * ptvalue(x)

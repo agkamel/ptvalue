@@ -24,13 +24,13 @@ As this package is could be imported inside other packages (ex., **ptchart**), i
 
 ## Installation
 
-You can install **ptvalue** with the following code
+You can install **ptvalue** with the following code:
 
 ``` r
 install.packages("ptvalue")
 ```
 
-or you can install the development version as follow:
+Or you can install the development version as follow:
 
 ``` r
 remotes::install_github("agkamel/ptvalue")
