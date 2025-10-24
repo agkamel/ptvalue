@@ -10,7 +10,6 @@ License: MIT + file LICENSE
 URL: https://github.com/agkamel/ptvalue
 BugReports: https://github.com/agkamel/ptvalue/issues
 Imports: 
-    cli,
     rlang,
     vctrs
 Suggests: 
