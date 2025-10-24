@@ -18,24 +18,41 @@ new_ptvalue <- function(x = double()) {
 
 #' ptvalue: Working with precision teaching values
 #'
-#' This class allow to print precision teaching mesures with the
-#' times or the division symbols like \eqn{\times 2} or \eqn{\div 1.4} by
+#' This class allow to print precision teaching measures with the
+#' times or the division symbols (ex. \eqn{\times 2}, \eqn{\div 1.4}) by
 #' converting numeric values to precision teaching values. More specifically,
-#' input values between \eqn{ ] 0, 1 [ } will return output values greater or
-#' equal than \eqn{1} prefixed with \eqn{\div}; input values between \eqn{[ 1,
-#' \infty [} will return output values greater or equal than \eqn{1} prefixed
-#' with \eqn{\times}.
+#' providing:
+#' * Values between \eqn{ ] 0, 1 [ } will return output values
+#' \eqn{ \geq 1 } with a prefixed div (\eqn{\div}) symbol (ex. ).
+#' * Values between \eqn{[ 1, \infty [} will return output values
+#' \eqn{ \geq 1} with a prefixed times (\eqn{\times}) symbol.
+#' * Values of \eqn{ 0 } will return \eqn{\div}`Inf`.
+#' * `Inf` values will return \eqn{\times}`Inf`.
+#' * `NA` values will return `NA`.
 #'
-#' @param x A numeric vector. Values must be greater than 0.
+#'
+#' @param x A numeric vector. Values must be \eqn{\geq 0}.
 #' @param ... Other values passed to method.
 #'
-#' @return A numeric vector of class **ptvalue** that represent precision teaching mesures.
+#' @return A numeric vector of class **ptvalue** that represents precision teaching measures.
 #' @export
 #'
+#' @seealso [times()], [div()]
 #' @rdname ptvalue
 #' @examples
+#' # Basic examples
 #' x <- c(0.5, 0.8, 1, 1.25, 2)
 #' ptvalue(x)
+#'
+#' ptvalue(0)
+#' ptvalue(NA)
+#' ptvalue(Inf)
+#'
+#' # For convenience, `div()` can be used to
+#' # create decaying values without using decimal values
+#' ptvalue(c(0.5, 0.8))
+#' div(c(2, 1.25))
+#'
 ptvalue <- function(x = double()) {
   x <- vctrs::vec_cast(x, double())
   new_ptvalue(x)
@@ -45,6 +62,13 @@ ptvalue <- function(x = double()) {
 # Convenience function
 #' @export
 #' @rdname ptvalue
+#' @examples
+#' x <- ptvalue(2)
+#' is_ptvalue(x)
+#'
+#' x <- 2
+#' is_ptvalue(x)
+#'
 is_ptvalue <- function(x) {
   inherits(x, "ptvalue")
 }
@@ -370,4 +394,3 @@ div <- function(x = double()) {
 }
 
 
-}

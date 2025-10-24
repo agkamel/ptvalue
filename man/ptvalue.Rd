@@ -16,25 +16,51 @@ as_ptvalue(x, ...)
 \method{as_ptvalue}{default}(x, ...)
 }
 \arguments{
-\item{x}{A numeric vector. Values must be greater than 0.}
+\item{x}{A numeric vector. Values must be \eqn{\geq 0}.}
 
 \item{...}{Other values passed to method.}
 }
 \value{
-A numeric vector of class \strong{ptvalue} that represent precision teaching mesures.
+A numeric vector of class \strong{ptvalue} that represents precision teaching measures.
 }
 \description{
-This class allow to print precision teaching mesures with the
-times or the division symbols like \eqn{\times 2} or \eqn{\div 1.4} by
+This class allow to print precision teaching measures with the
+times or the division symbols (ex. \eqn{\times 2}, \eqn{\div 1.4}) by
 converting numeric values to precision teaching values. More specifically,
-input values between \eqn{ ] 0, 1 [ } will return output values greater or
-equal than \eqn{1} prefixed with \eqn{\div}; input values between \eqn{[ 1,
-\infty [} will return output values greater or equal than \eqn{1} prefixed
-with \eqn{\times}.
+providing:
+\itemize{
+\item Values between \eqn{ ] 0, 1 [ } will return output values
+\eqn{ \geq 1 } with a prefixed div (\eqn{\div}) symbol (ex. ).
+\item Values between \eqn{[ 1, \infty [} will return output values
+\eqn{ \geq 1} with a prefixed times (\eqn{\times}) symbol.
+\item Values of \eqn{ 0 } will return \eqn{\div}\code{Inf}.
+\item \code{Inf} values will return \eqn{\times}\code{Inf}.
+\item \code{NA} values will return \code{NA}.
+}
 }
 \examples{
+# Basic examples
 x <- c(0.5, 0.8, 1, 1.25, 2)
 ptvalue(x)
+
+ptvalue(0)
+ptvalue(NA)
+ptvalue(Inf)
+
+# For convenience, `div()` can be used to
+# create decaying values without using decimal values
+ptvalue(c(0.5, 0.8))
+div(c(2, 1.25))
+
+x <- ptvalue(2)
+is_ptvalue(x)
+
+x <- 2
+is_ptvalue(x)
+
 x <- c(0.5, 1, 2)
 as_ptvalue(x)
+}
+\seealso{
+\code{\link[=times]{times()}}, \code{\link[=div]{div()}}
 }
