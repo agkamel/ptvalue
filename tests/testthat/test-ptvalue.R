@@ -70,6 +70,18 @@ test_that("NAs are handled properly", {
 
 
 
+test_that("multiplication between double and ptvalue works properly", {
+  expect_equal(ptvalue(2) * 2, ptvalue(4))
+  expect_equal(2 * ptvalue(2), ptvalue(4))
+})
+
+
+
+test_that("division between double and ptvalue works properly", {
+  expect_equal(ptvalue(2) / 2, ptvalue(1))
+  expect_equal(2 / ptvalue(2), ptvalue(1))
+})
+
 
 
 # Tests for is_ptvalue() --------------------------------------------------

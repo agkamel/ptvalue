@@ -206,6 +206,42 @@ vec_arith.ptvalue.ptvalue <- function(op, x, y, ...) {
 }
 
 
+#' @export
+#' @method vec_arith.numeric ptvalue
+vec_arith.numeric.ptvalue <- function(op, x, y, ...) {
+
+  cli::cli_warn("Operations between vectors of class
+                ptvalue are in active development and are not reliable yet. Use with care.",
+                .frequency = "once",
+                .frequency_id = "operation")
+
+  switch(
+    op,
+    "*" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    "/" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    vctrs::stop_incompatible_op(op, x, y)
+  )
+}
+
+
+#' @export
+#' @method vec_arith.ptvalue numeric
+vec_arith.ptvalue.numeric <- function(op, x, y, ...) {
+
+  cli::cli_warn("Operations between vectors of class
+                ptvalue are in active development and are not reliable yet. Use with care.",
+                .frequency = "once",
+                .frequency_id = "operation")
+
+  switch(
+    op,
+    "*" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    "/" = new_ptvalue(vctrs::vec_arith_base(op, x, y)),
+    vctrs::stop_incompatible_op(op, x, y)
+  )
+}
+
+
 # Other useful functions --------------------------------------------------
 
 #' Invert ptvalue sign
