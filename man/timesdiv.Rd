@@ -3,7 +3,7 @@
 \name{times}
 \alias{times}
 \alias{div}
-\title{Create times or div vector of class \strong{ptvalue}.}
+\title{Create times or div vector of class \strong{ptvalue}}
 \usage{
 times(x = double())
 
@@ -13,14 +13,24 @@ div(x = double())
 \item{x}{A numeric vector. Values must be greater or equal than 1.}
 }
 \value{
-A numeric vector of class \strong{ptvalue} that represent precision teaching mesures.
+A numeric vector of class \strong{ptvalue} that represent precision teaching measures.
 }
 \description{
 \code{times()} and \code{div()} are convenient and stricter functions
-for creating growing or decaying precision teaching values with values
+for creating growing or decaying precision teaching values with numeric values
 greater or equal than 1 (or otherwise raise an error).
 }
+\details{
+Note that providing a vector of class \strong{ptvalue} to \code{times()} or \code{div()}
+will raise an error as these functions are stricter.
+}
 \examples{
-times(c(1, 2, 4))
-div(c(1, 2, 4))
+x <- c(1, 2, 4)
+times(x)
+div(x)
+
+# `div()` can be useful for specifying div values without
+#   the need to convert them first into values under zero
+ptvalue(c(0.25, 0.5, 1, 2, 4))
+ptvalue(c(div(4), div(2), 1, 2, 4))
 }

@@ -287,37 +287,64 @@ abs_sign <- function(x = double(), sign = "times") {
   }
 }
 
-#' Create times or div vector of class **ptvalue**.
-#'
-#' `times()` and `div()` are convenient and stricter functions
-#' for creating growing or decaying precision teaching values with values
-#' with values greater or equal than 1 (or otherwise raise an error).
-#'
-#' @param x A numeric vector. Values must be greater or equal than 1.
-#'
-#' @return A numeric vector of class **ptvalue** that represent precision teaching mesures.
 #' @export
-#' @rdname timesdiv
-#' @examples
-#' times(c(1, 2, 4))
-#' div(c(1, 2, 4))
-times <- function(x = double()) {
-  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
-  abs_sign(x, sign = "times")
-}
-
-#' @export
-#' @rdname timesdiv
-div <- function(x = double()) {
-  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
-  abs_sign(x, sign = "div")
-
-}
-
+#' @rdname convert_sign
 as_times <- function(x = double()) {
   abs_sign(x, sign = "times")
 }
 
+#' @export
+#' @rdname convert_sign
 as_div <- function(x = double()) {
   abs_sign(x, sign = "div")
+}
+
+
+
+
+
+
+#' Create times or div vector of class **ptvalue**
+#'
+#' `times()` and `div()` are convenient and stricter functions
+#' for creating growing or decaying precision teaching values with numeric values
+#' greater or equal than 1 (or otherwise raise an error).
+#'
+#'
+#' @param x A numeric vector. Values must be greater or equal than 1.
+#'
+#' @details
+#' Note that providing a vector of class **ptvalue** to `times()` or `div()`
+#' will raise an error as these functions are stricter.
+#'
+#' @return A numeric vector of class **ptvalue** that represent precision teaching measures.
+#' @export
+#' @rdname timesdiv
+#' @examples
+#' x <- c(1, 2, 4)
+#' times(x)
+#' div(x)
+#'
+#' # `div()` can be useful for specifying div values without
+#' #   the need to convert them first into values under zero
+#' ptvalue(c(0.25, 0.5, 1, 2, 4))
+#' ptvalue(c(div(4), div(2), 1, 2, 4))
+times <- function(x = double()) {
+  stopifnot("Arg `x` cannot be a class `ptvalue`." = !is_ptvalue(x))
+  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
+
+  abs_sign(vctrs::vec_cast(x, double()), sign = "times")
+}
+
+
+#' @export
+#' @rdname timesdiv
+div <- function(x = double()) {
+  stopifnot("Arg `x` cannot be a class `ptvalue`." = !is_ptvalue(x))
+  stopifnot("Arg `x` must be greater or equal than 1." = all(x >= 1))
+
+  abs_sign(vctrs::vec_cast(x, double()), sign = "div")
+}
+
+
 }
