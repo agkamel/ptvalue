@@ -26,9 +26,6 @@ new_ptvalue <- function(x = double()) {
 #' \infty [} will return output values greater or equal than \eqn{1} prefixed
 #' with \eqn{\times}.
 #'
-#' A few arithmetic operations will be allowed in the futur. It is currently
-#' under development.
-#'
 #' @param x A numeric vector. Values must be greater than 0.
 #' @param ... Other values passed to method.
 #'

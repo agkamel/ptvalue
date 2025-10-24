@@ -32,10 +32,6 @@ equal than \eqn{1} prefixed with \eqn{\div}; input values between \eqn{[ 1,
 \infty [} will return output values greater or equal than \eqn{1} prefixed
 with \eqn{\times}.
 }
-\details{
-A few arithmetic operations will be allowed in the futur. It is currently
-under development.
-}
 \examples{
 x <- c(0.5, 0.8, 1, 1.25, 2)
 ptvalue(x)
