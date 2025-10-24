@@ -18,7 +18,7 @@ A numeric vector of class \strong{ptvalue} that represent precision teaching mes
 \description{
 \code{times()} and \code{div()} are convenient and stricter functions
 for creating growing or decaying precision teaching values with values
-with values greater or equal than 1 (or otherwise raise an error).
+greater or equal than 1 (or otherwise raise an error).
 }
 \examples{
 times(c(1, 2, 4))
