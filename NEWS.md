@@ -1,4 +1,4 @@
-# ptvalue (development version)
+# ptvalue 0.2.0
 
 * Multiplication and division between a `ptvalue()` and a double/integer value is now allowed. 
   - The output is kept as a `ptvalue()` for now.
