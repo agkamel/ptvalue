@@ -7,10 +7,13 @@ test_that("correct ptvalue are returned", {
 })
 
 
+
 test_that("addition and subtraction return an error", {
   expect_error(ptvalue(2) + ptvalue(0.5))
   expect_error(ptvalue(2) + ptvalue(0.5))
 })
+
+
 
 test_that("multiplication works properly", {
 
@@ -39,7 +42,6 @@ test_that("multiplication works properly", {
 
 
 
-
 test_that("division works properly", {
 
   # Simple test
@@ -59,6 +61,8 @@ test_that("division works properly", {
   expect_equal(as.character(ptvalue(2) / ptvalue(0)), "×Inf")
 
 })
+
+
 
 test_that("NAs are handled properly", {
 
@@ -85,7 +89,7 @@ test_that("division between double and ptvalue works properly", {
 
 
 # Tests for is_ptvalue() --------------------------------------------------
-test_that("is_ptvalue works properly", {
+test_that("is_ptvalue() works properly", {
   expect_equal(is_ptvalue(ptvalue(2)), TRUE)
   expect_equal(is_ptvalue(2), FALSE)
 
@@ -100,9 +104,102 @@ test_that("conversion works properly", {
 
 
 # Tests for invert_sign() -------------------------------------------------
-test_that("invert_sign works properly", {
+test_that("invert_sign() works properly", {
+
+  # With double values
   expect_equal(invert_sign(c(0.5, 2)) |> as.character(),
                c("×2", "÷2"))
 })
 
+
+
+
+# Tests for abs_sign() ----------------------------------------------------
+test_that("abs_sign() works properly", {
+
+  expect_equal(abs_sign(c(0.5, 2)) |> as.character(),
+               c("×2", "×2"))
+
+  expect_equal(abs_sign(c(0.5, 2), sign = "times") |> as.character(),
+               c("×2", "×2"))
+
+  expect_equal(abs_sign(c(0.5, 2), sign = "div") |> as.character(),
+               c("÷2", "÷2"))
+
+  expect_error(abs_sign(c(0.5, 2), sign = "time"))
+
+})
+
+
+
+# Tests for times() -------------------------------------------------------
+test_that("times() properly", {
+
+  expect_equal(times(c(1, 2)) |> as.character(),
+               c("×1", "×2"))
+
+})
+
+
+test_that("values provided to times() must be greater or equal than 1", {
+
+  expect_error(times(c(0)))
+  expect_error(times(c(-1)))
+
+})
+
+
+test_that("class of values provided to times() must not be `ptvalue`", {
+
+  expect_error(times(c(ptvalue(2))))
+
+})
+
+
+
+# Tests for div() ---------------------------------------------------------
+test_that("div() properly", {
+
+  expect_equal(div(c(1, 2)) |> as.character(),
+               c("×1", "÷2"))
+
+})
+
+
+test_that("values provided to div() must be greater or equal than 1", {
+
+  expect_error(div(c(0)))
+  expect_error(div(c(-1)))
+
+})
+
+
+test_that("class of values provided to div() must not be `ptvalue`", {
+
+  expect_error(div(c(ptvalue(2))))
+
+})
+
+
+
+# Tests for as_times() and as_div() ---------------------------------------
+test_that("as_times() and as_div() work properly", {
+
+  expect_equal(as_times(c(0.5, 1, 2)) |> as.character(),
+               c("×2", "×1", "×2"))
+
+  expect_equal(as_div(c(0.5, 1, 2)) |> as.character(),
+               c("÷2", "×1", "÷2"))
+
+  })
+
+
+
+
+# Tests for operation inside a data.frame ---------------------------------
+df <- data.frame(x = ptvalue(c(0.5, 2)), y = c(2, 2))
+test_that("operation inside data.frame works properly", {
+  expect_equal({df["z"] <- df["x"] * df["y"]; df["z"]},
+               data.frame(z = c(ptvalue(1), ptvalue(4))))
+})
 
