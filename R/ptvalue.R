@@ -241,31 +241,54 @@ vec_arith.ptvalue.numeric <- function(op, x, y, ...) {
 
 # Other useful functions --------------------------------------------------
 
-#' Invert ptvalue sign
+#' Basic functions for converting ptvalues
 #'
-#' @param x A vector of class `ptvalue` or of type `double`.
+#' * `invert_sign()` inverts ptvalues' sign.
+#' * `abs_sign()` converts ptvalues' sign to an 'absolute' sign, times or div.
+#' * `as_times()` converts ptvalues' sign to all times.
+#' * `as_div()` converts ptvalues' sign to all div.
 #'
-#' @return A vector of class `ptvalue` with inverted sign.
+#' @param x A vector of class **ptvalue** or a numeric vector. If a numeric
+#' vector is provided, values must be greater than 0.
+#' @param sign Either `"times"` or `"div"`. Default to `"times"`.
+#'
+#' @details
+#' The function `invert_sign()` is the same as applying \eqn{ \frac{1}{x} } with
+#' the underlying numeric values of ptvalues. Times values (\eqn{\times}) will
+#' be converted to div (\eqn{\div}) and div to times.
+#'
+#' The function `abs_sign()` finds the multiplicative absolute values where all
+#' times and div values are converted to times values (by default). It can also
+#' converts to all div values by specifying `sign = "div"`.
+#'
+#' Functions `as_times()` and `as_div()` are wrappers of `abs_sign()` where
+#' `sign = "times"` is specified for `as_times()` and `sign = "div"` is
+#' specified for `as_div()`.
+#'
+#' All functions will return a vector of class **ptvalue** even when providing
+#' a numeric vector for `x` as it is the expected use. To see the underlying
+#' numeric vector, you can use `unclass()` or `as.double()`.
+#'
+#' @return
+#' A vector of class `ptvalue`.
+#'
 #' @export
-#'
+#' @rdname convert_sign
 #' @examples
-#' x <- c(0.5, 1.4, 2)
+#' x <- ptvalue(c(0.25, 0.5, 1, 2, 4))
+#' x
+#'
+#' abs_sign(x)
 #' invert_sign(x)
+#' as_times(x)
+#' as_div(x)
 invert_sign <- function(x = double()) {
   new_ptvalue(1 / vctrs::vec_cast(x, double()))
 }
 
-#' Find 'absolute' ptvalue
-#'
-#' @param x A vector of class `ptvalue` or of type `double`.
-#' @param sign Either `"times"` or `"div"`. Default to 'times'.
-#'
-#' @return A vector of class `ptvalue` with absolute ptvalue.
+
 #' @export
-#'
-#' @examples
-#' x <- c(0.5, 1.4, 2)
-#' abs_sign(x)
+#' @rdname convert_sign
 abs_sign <- function(x = double(), sign = "times") {
 
   stopifnot("Arg `sign` must be either 'times' or 'div'." = sign %in% c("times", "div"))
